@@ -20,14 +20,14 @@
 
 # 网站图标
 favicon:
-  enable: true
+  enable: FALSE
   icon: /images/favicon.png
   touch_icon: /images/favicon.png
 
 # 用户头像与昵称
 avatar:
   author_photo: /images/avatar.png
-  author_nickname: Oranges
+  author_nickname: Ellen
   path: /
 
 # Google 分析
@@ -101,7 +101,7 @@ navbar:
     key: tags
   -
     name: Friends
-    enable: true
+    enable: false
     path: /friends/
     key: friends
   -
@@ -169,9 +169,9 @@ footer:
     # -
     #   # rss需安装 hexo-generator-feed 插件
     #   # 具体参照https://github.com/hexojs/hexo-generator-feed
-    #   name: rss
-    #   icon: rss
-    #   path: /atom.xml
+       name: rss
+       icon: rss
+       path: /atom.xml
 
   more:
     # 支持变量显示，可自定义扩展，具体见主题/layout/_partial/footer.ejs
