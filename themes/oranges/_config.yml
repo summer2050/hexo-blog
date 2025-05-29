@@ -27,7 +27,7 @@ favicon:
 # 用户头像与昵称
 avatar:
   # author_photo: /images/avatar.png
-  author_nickname: Ellen
+  author_nickname: Ellen's Blog
   path: /
 
 # Google 分析
