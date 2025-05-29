@@ -101,7 +101,7 @@ navbar:
     key: tags
   -
     name: Friends
-    enable: true
+    enable: false
     path: /friends/
     key: friends
   -
