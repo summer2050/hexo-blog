@@ -1,7 +1,7 @@
 # 首页配置
 home:
   hero:
-    name: # 名称
+    name: Ellen # 名称
     intro: # 个人简介
     avatar: # 头像
   posts: recent # recent: 最新文章 | recommend: 推荐文章
@@ -14,14 +14,14 @@ articles:
 
 # 菜单栏
 menu:
-  # - name: 归档
-  #   url: /archives/
+   - name: 归档
+     url: /archives/
   # - name: 友链
   #   url: /friends/
   # - name: 留言
   #   url: /messages/
-  # - name: 关于
-  #   url: /about/
+   - name: 关于
+     url: /about/
 
 comment:
   enable: false
@@ -46,7 +46,7 @@ giscus:
   loading:
 
 search:
-  enable: false
+  enable: true
   type: # algolia | pagefind
 
 # Docsearch https://docsearch.algolia.com/apply/
