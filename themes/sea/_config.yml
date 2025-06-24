@@ -1,7 +1,7 @@
 # 首页配置
 home:
-  hero:
-    name: Ellen # 名称
+ #  hero:
+    name:  # 名称
     intro: # 个人简介
     avatar: # 头像
   posts: recent # recent: 最新文章 | recommend: 推荐文章
