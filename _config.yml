@@ -6,6 +6,7 @@ nav:
 # Projects: http://github.com/gabithume
 
 # projects_url: http://github.com/gabithume
+theme: cactus-light
 
 customize:
     gravatar:
