@@ -110,9 +110,16 @@ navbar:
     path: /about/
     key: about
 
+<<<<<<< HEAD
 # 文章目录
 catalog:
   enable: true
+=======
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: ares
+>>>>>>> 1d8d7ce93f7ff3805eef3ae1c5fab4709b5be1ae
 
 # 文章末尾的上一页与下一页
 prevnext:
@@ -255,6 +262,7 @@ cdns:
 
   # LaTeX 公式
   mathjax:
+<<<<<<< HEAD
     enable: false
     url: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js
 
@@ -281,3 +289,11 @@ cdns:
 
 # 主题色
 themeColor: '#808080'
+=======
+    css: 'css/math/style.css'
+    options:
+      conversion:
+        display: false
+      tex:
+      svg:
+>>>>>>> 1d8d7ce93f7ff3805eef3ae1c5fab4709b5be1ae
