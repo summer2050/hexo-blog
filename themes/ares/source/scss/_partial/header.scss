@@ -1,0 +1,45 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+header {
+    min-height: $header-height;
+    @include clearfix;
+  
+    .logo-link {
+      float: left;
+  
+      img {
+        height: $header-height;
+      }
+    }
+  
+    .nav {
+      float: right;
+      left: 80px;
+      width: auto;
+    }
+  
+    .nav-list {
+      @include flex(column);
+      gap: 0;
+  
+      &-top {
+        @include flex(row, flex-end, center);
+      }
+  
+      &-bottom {
+        @include flex(row, flex-end, center);
+        margin: 0;
+      }
+  
+      &-item {
+        display: inline-block;
+        padding: $nav-item-padding;
+  
+        a {
+          font-size: 16px;
+          line-height: 1.4;
+        }
+      }
+    }
+  }

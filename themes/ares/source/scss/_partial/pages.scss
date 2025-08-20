@@ -1,0 +1,115 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+%post-list-base {
+  .post-item {
+    display: flex;
+    padding: 2px 0;
+    margin-bottom: $small-spacing;
+
+    .post-title-link {
+      flex: 1;
+      font-size: 1rem;
+      color: $link-color;
+      word-break: break-all;
+
+      &:hover {
+        border-bottom: 0;
+        color: $secondary-color;
+      }
+    }
+
+    .post-info {
+      flex: 0 0 125px;
+      color: $medium-gray;
+    }
+  }
+}
+
+%taxonomy-item-base {
+    margin-bottom: 10px;
+  
+    a {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: $light-gray;
+      border-radius: $border-radius;
+      color: $link-color;
+      text-decoration: none;
+      transition: all $transition-duration $transition-timing;
+  
+      &:hover {
+        background-color: color.adjust($light-gray, $lightness: -5%);
+        color: $text-dark;
+      }
+  
+      .tag-count,
+      .category-count {
+        color: $text-light;
+        font-size: 0.9em;
+      }
+    }
+  }
+
+%page-container {
+  max-width: 500px;
+  margin: 5em auto;
+}
+
+.archive {
+  @extend %page-container;
+  @extend %post-list-base;
+
+  &-year {
+    font-size: 1.5em;
+    color: $heading-color;
+    margin: 2em 0 1em;
+  }
+}
+
+.tag-index {
+  @extend %page-container;
+
+  .tag-list {
+    @include flex(row, flex-start);
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .tag-item {
+    @extend %taxonomy-item-base;
+  }
+
+  .tag-count {
+    color: $text-light;
+    font-size: 0.9em;
+  }
+}
+
+.category-index {
+  @extend %page-container;
+
+  .category-list {
+    @include flex(row, flex-start);
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .category-item {
+    @extend %taxonomy-item-base;
+  }
+
+  .category-count {
+    color: $text-light;
+    font-size: 0.9em;
+  }
+}
+
+.tag,
+.category {
+  @extend %page-container;
+  @extend %post-list-base;
+}

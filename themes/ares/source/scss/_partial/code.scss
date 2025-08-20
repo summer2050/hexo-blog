@@ -1,0 +1,221 @@
+@use "sass:color";
+@use "../variables" as *;
+
+figure.highlight {
+  position: relative;
+  margin: 1em 0;
+  border-radius: $border-radius;
+  background-color: $light-gray;
+
+  figcaption {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    padding: 0.5em 1em;
+    background: color.adjust($light-gray, $lightness: -3%);
+    border-bottom: 1px solid color.adjust($light-gray, $lightness: -10%);
+    gap: 1em;
+    
+    .info {
+      display: flex;
+      align-items: center;
+      gap: 0.8em;
+      flex: 1;
+      
+      .filename {
+        font-family: $code-font-family;
+        font-size: $code-font-size;
+        color: color.adjust($light-gray, $lightness: -40%);
+      }
+      
+      .lang-name {
+        color: color.adjust($light-gray, $lightness: -30%);
+        font-size: $code-font-size;
+        text-transform: uppercase;
+      }
+
+      .source-link {
+        color: color.adjust($light-gray, $lightness: -40%);
+        text-decoration: none;
+        
+        &:hover {
+          color: $primary-color;
+          text-decoration: underline;
+        }
+      }
+    }
+    
+    .actions {
+      display: flex;
+      gap: 0.5em;
+      
+      button {
+        padding: 0.3em 0.6em;
+        font-size: $code-font-size;
+        color: color.adjust($light-gray, $lightness: -30%);
+        background: transparent;
+        border: 1px solid color.adjust($light-gray, $lightness: -10%);
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          color: $primary-color;
+          background: color.adjust($light-gray, $lightness: -8%);
+        }
+        
+        &.copied {
+          color: #2ecc71;
+          border-color: #2ecc71;
+        }
+      }
+    }
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .gutter,
+  .code {
+    padding: 1em 0;
+    
+    pre {
+      margin: 0;
+      padding: 0 1em;
+      line-height: 1.5;
+      
+      .line {
+        min-height: 1.5em;
+      }
+    }
+  }
+
+  .gutter {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 40px;
+    background: color.adjust($light-gray, $lightness: -3%);
+    border-right: 1px solid color.adjust($light-gray, $lightness: -10%);
+    
+    pre {
+      text-align: right;
+      background: color.adjust($light-gray, $lightness: -3%);
+      color: color.adjust($light-gray, $lightness: -30%);
+    }
+    
+    &.no-line-number {
+      display: none;
+    }
+  }
+
+  .code {
+    position: relative;
+    background-color: #f8f8f8;
+    
+    pre .line.marked {
+      background-color: color.adjust($primary-color, $alpha: -0.9);
+    }
+  }
+
+  &.folded {
+    max-height: 600px;
+    overflow-y: hidden;
+    
+    &:has(.code pre) {
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: linear-gradient(
+          transparent,
+          $light-gray
+        );
+        pointer-events: none;
+      }
+    }
+
+    &:not(:has(.code pre:after)) {
+      max-height: unset; 
+      overflow-y: visible;
+    }
+  }
+}
+
+pre {
+  color: $dark-gray;
+  font-family: $code-font-family;
+  
+  .function .keyword,
+  .constant { color: #0092db; }
+  .keyword,
+  .attribute { color: $code-color; }
+  .number,
+  .literal { color: #ae81ff; }
+  .tag,
+  .tag .title,
+  .change,
+  .winutils,
+  .flow,
+  .lisp .title,
+  .clojure .built_in,
+  .nginx .title,
+  .tex .special { color: #2973b7; }
+  .symbol,
+  .symbol .string,
+  .value,
+  .regexp { color: $primary-color; }
+  .title { color: #83B917; }
+  .tag .value,
+  .string,
+  .subst,
+  .haskell .type,
+  .preprocessor,
+  .ruby .class .parent,
+  .built_in,
+  .sql .aggregate,
+  .django .template_tag,
+  .django .variable,
+  .smalltalk .class,
+  .javadoc,
+  .django .filter .argument,
+  .smalltalk .localvars,
+  .smalltalk .array,
+  .attr_selector,
+  .pseudo,
+  .addition,
+  .stream,
+  .envvar,
+  .apache .tag,
+  .apache .cbracket,
+  .tex .command,
+  .prompt { color: $primary-color; }
+  .comment,
+  .java .annotation,
+  .python .decorator,
+  .template_comment,
+  .pi,
+  .doctype,
+  .shebang,
+  .apache .sqbracket,
+  .tex .formula { color: #b3b3b3; }
+  .deletion { color: #BA4545; }
+  .coffeescript .javascript,
+  .javascript .xml,
+  .tex .formula,
+  .xml .javascript,
+  .xml .vbscript,
+  .xml .css,
+  .xml .cdata { opacity: 0.5; }
+}

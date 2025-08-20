@@ -1,0 +1,84 @@
+mixin nav-link(item)
+    if item.type === 'internal'
+        - var fullPath = page.lang === theme.default_lang ? item.path : `/${page.lang}${item.path}`
+        - var act = "/" + page.current_url === fullPath
+        a.nav-link(class={active: act} href=url_for(fullPath))
+            != __(`menu.${item.key}`)
+    else if item.type === 'external'
+        a.nav-link(href=item.path target="_blank" rel="noopener noreferrer")
+            != __(`menu.${item.key}`)
+            i.fas.fa-external-link-alt
+
+mixin nav-button(button)
+    case button.component
+        when 'language-switcher'
+            +language-switcher()
+        when 'search'
+            +search-button()
+        default
+            button(type="button" class=`nav-button-${button.key}`)
+                if button.icon
+                    i(class=button.icon)
+                span!= __(button.key)
+
+mixin language-switcher()
+    .language-menu
+        button.language-toggle(type="button")
+            i.fas.fa-globe
+            span!= __('nav.current_language')
+        .language-dropdown.hidden
+            each lang in theme.languages || ['zh', 'en']
+                if lang !== page.lang
+                    if page.layout === 'post'
+                        - var targetPath = page.translations && page.translations[lang] ? page.translations[lang] : null
+                        if targetPath
+                            a.language-option(href=url_for(targetPath))
+                                != __('nav.languages.' + lang)
+                        else if page.from
+                            a.language-option(href=page.from)
+                                != __('nav.languages.' + lang)
+                    else
+                        - var targetPath = page.canonical_path.split('/').slice(page.lang === theme.default_lang ? 0 : 1).join('/')
+                        - var switchPath = lang === theme.default_lang ? `/${targetPath}` : `/${lang}/${targetPath}`
+                        a.language-option(href=url_for(switchPath.replace(/\/+$/, '')))
+                            != __('nav.languages.' + lang)
+
+mixin search-button()
+    button#search-btn(type="button" aria-label=__('nav.search'))
+        i.fas.fa-search
+
+mixin search-overlay()
+    #search-popup.search-overlay.hidden
+        button#search-close.search-close(type="button" aria-label=__('search.close'))
+            i.fas.fa-times
+        .search-container
+            .search-input-wrapper
+                input#local-search-input.search-input(type="text" placeholder=__('nav.search_placeholder'))
+            #local-search-result.search-result
+
+mixin more-menu()
+    button.more-toggle(type="button")
+        span!= __('nav.more')
+        i.fas.fa-chevron-down
+    .more-dropdown.hidden
+        ul.dropdown-list
+            if theme.nav.secondary && theme.nav.secondary.links
+                each item in theme.nav.secondary.links
+                    li.dropdown-item
+                        if item.type === 'internal'
+                            +nav-link(item)
+                        else if item.type === 'external'
+                            a.dropdown-link(href=item.path target="_blank" rel="noopener noreferrer")
+                                != __(`menu.${item.key}`)
+                                i.fas.fa-external-link-alt
+
+mixin mobile-menu()
+    .mobile-menu-container
+        .menu-header
+            button.menu-close(type="button" aria-label=__('nav.close'))
+                i.fas.fa-times
+        .menu-content
+            ul.nav-list
+                each item in [...theme.nav.primary.links, ...theme.nav.secondary.links]
+                    li.nav-item
+                        +nav-link(item)

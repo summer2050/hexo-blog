@@ -1,0 +1,66 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+#search {
+  &-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 50%;
+    padding: $large-spacing;
+    border: 3px solid $border-color;
+    background-color: $background-color;
+    z-index: $z-index-popup;
+    max-width: 600px;
+
+    input[type="text"] {
+      display: block;
+    }
+  }
+
+  &-panel {
+    @include flex(column);
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  &-icon {
+    cursor: pointer;
+  }
+}
+
+#local-search {
+  &-input {
+    width: 100%;
+    margin-bottom: $base-spacing;
+  }
+
+  &-result {
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+}
+
+.search {
+  &-result {
+    color: $text-secondary;
+    
+    &-list {
+      padding-left: 10px;
+    }
+
+    &-title {
+      font-weight: bold;
+    }
+  }
+
+  &-keyword {
+    border-bottom: 1px dashed $highlight-color;
+    font-weight: bold;
+  }
+}

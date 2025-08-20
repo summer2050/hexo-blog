@@ -1,0 +1,35 @@
+menu:
+  home: ホーム
+  archive: アーカイブ
+  tags: タグ
+  categories: 分類
+  friends: リンク集
+  about: について
+  github: GitHub
+  rss: RSS
+  portfolio: 作品集
+nav:
+  search_placeholder: 検索...
+  current_language: 日本語
+  languages:
+    en: English
+    zh: 中文
+    jp: 日本語
+  more: 更多
+  close: 閉じる
+code:
+  expand: 展開する
+  fold: 折りたたむ
+  copy: コピー
+  copied: コピー済み
+  copy_failed: コピーに失敗しました
+friendlinks: リンク集
+archive_title: アーカイブ
+tags_title: タグ
+categories_title: 分類
+prev: 前へ
+next: 次へ
+prev_post: 前の投稿
+next_post: 次の投稿
+more: ...もっと読む
+translated: 翻訳 · 原文リンク

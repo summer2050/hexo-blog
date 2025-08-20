@@ -1,0 +1,179 @@
+//- LaTex
+script(async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script")
+
+//- Analytics tracking
+- var ga = theme.ga;
+if ga
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    script(async, src='https://www.googletagmanager.com/gtag/js?id=' + ga)
+    script
+        | window.dataLayer = window.dataLayer || [];
+        | function gtag(){dataLayer.push(arguments);}
+        | gtag('js', new Date());
+        | gtag('config', '#{ga}');
+
+//- Local search
+if config.search
+    script(src=url_for('/js/search.js'))
+    script.
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBtn = document.getElementById('search-btn');
+            const searchPopup = document.getElementById('search-popup');
+            const searchInput = document.getElementById('local-search-input');
+            const searchClose = document.getElementById('search-close');
+
+            if (searchBtn && searchPopup && searchInput) {
+                searchBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    searchPopup.classList.remove('hidden');
+                    searchInput.focus();
+                });
+
+                searchPopup.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+
+                if (searchClose) {
+                    searchClose.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        searchPopup.classList.add('hidden');
+                    });
+                }
+
+                document.addEventListener('click', function() {
+                    searchPopup.classList.add('hidden');
+                });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        searchPopup.classList.add('hidden');
+                    }
+                });
+
+                let search_path = "#{config.search.path}";
+                if (search_path.length === 0) {
+                    search_path = "search.xml";
+                }
+                const path = "#{config.root}" + search_path;
+                searchFunc(path, 'local-search-input', 'local-search-result');
+            }
+        });
+
+//- Language switch
+if config.language
+    script.
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageToggle = document.querySelector('.language-toggle');
+            const languageDropdown = document.querySelector('.language-dropdown');
+
+            if (languageToggle && languageDropdown) {
+            languageToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                languageDropdown.classList.toggle('hidden');
+            });
+
+            languageDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            document.addEventListener('click', function() {
+                languageDropdown.classList.add('hidden');
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                languageDropdown.classList.add('hidden');
+                }
+            });
+            }
+        });
+
+//- More menu
+script.
+    document.addEventListener('DOMContentLoaded', function() {
+        const moreToggle = document.querySelector('.more-toggle');
+        const moreDropdown = document.querySelector('.more-dropdown');
+
+        if (moreToggle && moreDropdown) {
+            moreToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                moreDropdown.classList.toggle('hidden');
+            });
+
+            moreDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            document.addEventListener('click', function() {
+                moreDropdown.classList.add('hidden');
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    moreDropdown.classList.add('hidden');
+                }
+            });
+        }
+    });
+
+//- Mobile navigation
+script.
+    const hamburger = document.querySelector('.hamburger-menu');
+    const mobileMenu = document.querySelector('.mobile-menu-container');
+    const menuClose = document.querySelector('.menu-close');
+    
+    if (hamburger && mobileMenu) {
+        const closeDropdowns = () => {
+            const openDropdowns = mobileMenu.querySelectorAll('.dropdown-menu.show');
+            const rotatedToggles = mobileMenu.querySelectorAll('.dropdown-toggle.rotated');
+            openDropdowns.forEach(dropdown => dropdown.classList.remove('show'));
+            rotatedToggles.forEach(toggle => toggle.classList.remove('rotated'));
+        };
+
+        const closeMenu = () => {
+            mobileMenu.classList.remove('show');
+            hamburger.setAttribute('aria-expanded', false);
+            closeDropdowns();
+        };
+
+        hamburger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            mobileMenu.classList.toggle('show');
+            const isExpanded = mobileMenu.classList.contains('show');
+            hamburger.setAttribute('aria-expanded', isExpanded);
+        });
+
+        if (menuClose) {
+            menuClose.addEventListener('click', closeMenu);
+        }
+
+        const dropdownItems = mobileMenu.querySelectorAll('.has-dropdown');
+        dropdownItems.forEach(item => {
+            const link = item.querySelector('.nav-link');
+            const dropdownMenu = item.querySelector('.dropdown-menu');
+            const dropdownToggle = item.querySelector('.dropdown-toggle');
+
+            if (link && dropdownMenu) {
+                link.addEventListener('click', function(e) {
+                    if (e.target !== link) return;
+                    e.preventDefault();
+                    dropdownMenu.classList.toggle('show');
+                    dropdownToggle?.classList.toggle('rotated');
+                });
+            }
+        });
+
+        mobileMenu.addEventListener('click', e => e.stopPropagation());
+
+        document.addEventListener('click', closeMenu);
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('show')) {
+                closeMenu();
+            }
+        });
+    }

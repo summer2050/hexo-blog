@@ -1,0 +1,14 @@
+extends partial/layout
+
+block container
+    include mixins/post
+    .category
+        h2= page.category
+        +postList()
+
+block pagination
+    include mixins/paginator
+    +home()
+
+block copyright
+    include partial/copyright

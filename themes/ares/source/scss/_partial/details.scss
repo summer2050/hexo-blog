@@ -1,0 +1,46 @@
+@use "sass:color";
+@use "../variables" as *;
+
+details {
+    margin: 1em 0;
+    padding: 1em;
+    background: $light-gray;
+    border-radius: $border-radius;
+    border: 1px solid color.adjust($light-gray, $lightness: -10%);
+  
+    summary {
+      cursor: pointer;
+      padding: 0.5em;
+      margin: -0.5em;
+      border-radius: $border-radius;
+      
+      &:hover {
+        background: color.adjust($light-gray, $lightness: -5%);
+      }
+      
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    &[open] {
+      summary::before {
+        transform: rotate(90deg);
+      }
+
+      > *:not(summary) {
+        animation: details-show 0.2s ease-in-out;
+      }
+    }
+  }
+  
+  @keyframes details-show {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

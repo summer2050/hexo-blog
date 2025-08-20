@@ -1,0 +1,103 @@
+script.
+  document.addEventListener('DOMContentLoaded', function() {
+    const codeBlocks = document.querySelectorAll('figure.highlight');
+    
+    codeBlocks.forEach(block => {
+      let caption = block.querySelector('figcaption');
+      if (!caption) {
+        caption = document.createElement('figcaption');
+        block.insertBefore(caption, block.firstChild);
+      }
+
+      const info = document.createElement('div');
+      info.className = 'info';
+      
+      const filename = caption.querySelector('span');
+      if (filename) {
+        filename.className = 'filename';
+        info.appendChild(filename);
+      }
+      
+      const lang = block.className.split(' ')[1];
+      if (lang) {
+        const langSpan = document.createElement('span');
+        langSpan.className = 'lang-name';
+        langSpan.textContent = lang;
+        info.appendChild(langSpan);
+      }
+
+      const sourceLink = caption.querySelector('a');
+      if (sourceLink) {
+        sourceLink.className = 'source-link';
+        info.appendChild(sourceLink);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'actions';
+
+      const codeHeight = block.scrollHeight;
+      const threshold = 300;
+
+      if (codeHeight > threshold) {
+        block.classList.add('folded');
+        
+        const toggleBtn = document.createElement('button');
+        toggleBtn.textContent = '#{__("code.expand")}';
+        toggleBtn.addEventListener('click', () => {
+          block.classList.toggle('folded');
+          toggleBtn.textContent = block.classList.contains('folded') ? '#{__("code.expand")}' : '#{__("code.fold")}';
+        });
+        actions.appendChild(toggleBtn);
+      }
+
+      const copyBtn = document.createElement('button');
+      copyBtn.textContent = '#{__("code.copy")}';
+      copyBtn.addEventListener('click', async () => {
+        const codeLines = block.querySelectorAll('.code .line');
+        const code = Array.from(codeLines)
+          .map(line => line.textContent)
+          .join('\n')
+          .replace(/\n\n/g, '\n');
+        
+        try {
+          await navigator.clipboard.writeText(code);
+          copyBtn.textContent = '#{__("code.copied")}';
+          copyBtn.classList.add('copied');
+          
+          setTimeout(() => {
+            copyBtn.textContent = '#{__("code.copy")}';
+            copyBtn.classList.remove('copied');
+          }, 3000);
+        } catch (err) {
+          console.error('复制失败:', err);
+          copyBtn.textContent = '#{__("code.copy_failed")}';
+          
+          setTimeout(() => {
+            copyBtn.textContent = '#{__("code.copy")}';
+          }, 3000);
+        }
+      });
+      actions.appendChild(copyBtn);
+
+      caption.innerHTML = '';
+      caption.appendChild(info);
+      caption.appendChild(actions);
+
+      const markedLines = block.getAttribute('data-marked-lines');
+      if (markedLines) {
+        const lines = markedLines.split(',');
+        lines.forEach(range => {
+          if (range.includes('-')) {
+            const [start, end] = range.split('-').map(Number);
+            for (let i = start; i <= end; i++) {
+              const line = block.querySelector(`.line-${i}`);
+              if (line) line.classList.add('marked');
+            }
+          } else {
+            const line = block.querySelector(`.line-${range}`);
+            if (line) line.classList.add('marked');
+          }
+        });
+      }
+    });
+  });

@@ -1,0 +1,19 @@
+extends partial/layout
+
+block container
+    include mixins/post
+    .category-index
+        - var pageTitle = page.title != null ? page.title: __('categories_title');
+        h2= pageTitle
+        .category-list
+            each category in get_categories().data
+                - var postCount = category.posts.data ? category.posts.data.filter(post => post.lang === page.lang).length : 0
+                if postCount > 0
+                    .category-item
+                        - var categoryPath = category.slug || category.name
+                        a(href=url_for_lang(page.lang, 'categories/' + categoryPath))
+                            = category.name
+                            span.category-count= ` (${postCount})`
+
+block copyright
+    include partial/copyright

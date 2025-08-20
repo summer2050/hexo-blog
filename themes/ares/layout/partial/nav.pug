@@ -1,0 +1,34 @@
+include mixins/nav
+
+nav.site-nav
+    .nav-main
+        .nav-primary
+            if theme.nav.primary.links && theme.nav.primary.links.length
+                ul.nav-list.hidden-mobile
+                    each item in theme.nav.primary.links
+                        li.nav-item
+                            +nav-link(item)
+            
+            if theme.nav.primary.buttons && theme.nav.primary.buttons.length
+                .nav-tools
+                    each button in theme.nav.primary.buttons
+                        if button.component === 'language-switcher'
+                            +language-switcher()
+                        else if button.component === 'search'
+                            +search-button()
+        
+            .nav-controls
+                .more-menu.hidden-mobile
+                    +more-menu()
+                
+                button.hamburger-menu.hidden-desktop(type="button" aria-label=__('nav.menu'))
+                    i.fas.fa-bars
+        
+        if theme.nav.secondary && theme.nav.secondary.buttons && theme.nav.secondary.buttons.length
+            .nav-secondary-buttons
+                each button in theme.nav.secondary.buttons
+                    if button.component
+                        +nav-button(button)
+    
+    +search-overlay()
+    +mobile-menu()

@@ -1,0 +1,19 @@
+extends partial/layout
+
+block container
+    include mixins/post
+    .tag-index
+        - var pageTitle = page.title != null ? page.title: __('tags_title');
+        h2= pageTitle
+        .tag-list
+            each tag in get_tags().data
+                - var postCount = tag.posts.data ? tag.posts.data.filter(post => post.lang === page.lang).length : 0
+                if postCount > 0
+                    .tag-item
+                        - var tagPath = tag.slug || tag.name
+                        a(href=url_for_lang(page.lang, 'tags/' + tagPath))
+                            = tag.name
+                            span.tag-count= ` (${postCount})`
+
+block copyright
+    include partial/copyright

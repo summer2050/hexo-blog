@@ -1,0 +1,35 @@
+{
+  "name": "hexo-theme-ares",
+  "version": "1.0.0",
+  "description": "A hexo theme based on hexo-theme-hermes and hexo-theme-apollo",
+  "main": "index.js",
+  "scripts": {
+    "sass": "gulp sass",
+    "watch": "gulp watch",
+    "build": "gulp sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cytrogen/hexo-theme-ares"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "ares"
+  ],
+  "author": "Cytrogen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cytrogen/hexo-theme-ares/issues"
+  },
+  "homepage": "https://github.com/cytrogen/hexo-theme-ares#readme",
+  "devDependencies": {
+    "@types/sass": "^1.45.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.83.0"
+  }
+}

@@ -1,0 +1,27 @@
+@use "sass:map";
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@500;700&display=swap');
+
+$jetbrains-variants: (
+  'Bold-Italic': (weight: 700, style: italic),
+  'Bold': (weight: 700, style: normal),
+  'ExtraBold-Italic': (weight: 800, style: italic),
+  'ExtraBold': (weight: 800, style: normal),
+  'Italic': (weight: 400, style: italic),
+  'Medium-Italic': (weight: 500, style: italic),
+  'Medium': (weight: 500, style: normal),
+  'Regular': (weight: 400, style: normal)
+);
+
+@each $variant, $properties in $jetbrains-variants {
+  @font-face {
+    font-family: 'JetBrains Mono';
+    src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-#{$variant}.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-#{$variant}.woff') format('woff');
+    font-weight: map.get($properties, 'weight');
+    font-style: map.get($properties, 'style');
+    font-display: swap;
+  }
+}

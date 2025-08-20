@@ -1,0 +1,57 @@
+mixin postInfo(item)
+    .post-info
+        != full_date(item.date, 'l')
+        if item.from && (is_home() || is_post())
+            a.post-from(href=item.from target="_blank" title=item.from)!= __('translated')
+
+mixin posts()
+    ul.home.post-list
+        - for (var post of page.posts.data || [])
+            - if (post.lang == page.lang)
+                li.post-list-item
+                    article.post-block
+                        h2.post-title
+                            a.post-title-link(href= url_for(post.path))
+                                != post.title
+                        +postInfo(post)
+                        if post.excerpt
+                            .post-content
+                                != post.excerpt
+                            a.read-more(href= url_for(post.path))!= __('more')
+                        else
+                            .post-content
+                                != post.content
+
+mixin postList()
+    if page.posts
+        - var posts = page.posts.data || page.posts
+        if posts && posts.length
+            - var years = {}
+            - for (var post of posts)
+                - if (post.lang == page.lang)
+                    - var year = new Date(post.date).getFullYear()
+                    - if (!years[year]) years[year] = []
+                    - years[year].push(post)
+
+            - Object.keys(years).forEach(function(year) {
+                - years[year].sort((a, b) => new Date(b.date) - new Date(a.date))
+            - })
+
+            - Object.keys(years).sort((a, b) => b - a).forEach(function(year) {
+                h2.archive-year!= year
+                - years[year].forEach(function(post) {
+                    .post-item
+                        +postInfo(post)
+                        a.post-title-link(href= url_for(post.path))
+                            != post.title
+                - })
+            - })
+
+mixin post(item)
+    .post
+        article.post-block
+            h1.post-title
+                != item.title
+            +postInfo(item)
+            .post-content
+                != item.content

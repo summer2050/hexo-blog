@@ -1,0 +1,35 @@
+menu:
+  home: HOME
+  archive: ARCHIVE
+  tags: TAGS
+  categories: CATEGORIES
+  friends: BLOGROLL
+  about: ABOUT
+  github: GITHUB
+  rss: RSS
+  portfolio: PORTFOLIO
+nav:
+  search_placeholder: Search...
+  current_language: English
+  languages:
+    en: English
+    zh: 中文
+    jp: 日本語
+  more: MORE
+  close: CLOSE
+code:
+  expand: Expand
+  fold: Fold
+  copy: Copy
+  copied: Copied
+  copy_failed: Copy failed
+friendlinks: Blogrolls
+archive_title: Archive
+tags_title: Tags
+categories_title: Categories
+prev: PREV
+next: NEXT
+prev_post: PREV POST
+next_post: NEXT POST
+more: ...MORE
+translated: Translate · Original Link

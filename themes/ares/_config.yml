@@ -1,0 +1,68 @@
+default_lang: zh
+
+nav:
+  primary:
+    links:
+      - type: internal
+        key: home
+        path: /
+    
+    buttons:
+      - type: component
+        key: language
+        component: language-switcher
+      - type: component
+        key: search
+        component: search
+  
+  secondary:
+    links:
+      - type: internal
+        key: archive
+        path: /archives
+      - type: internal
+        key: categories
+        path: /categories
+      - type: internal
+        key: tags
+        path: /tags
+      - type: internal
+        key: about
+        path: /about
+      - type: internal
+        key: friends
+        path: /friends
+      - type: internal
+        key: rss
+        path: /atom.xml
+      - type: external
+        key: github
+        path: https://github.com/cytrogen
+
+favicon: favicon.png
+logo: favicon.png
+
+# Disqus Comment
+# disqus:
+
+# Google Analytics
+# ga: G-
+
+# Copyright Infomation
+startyear:
+
+# Image Credits
+enable_image_credit: false
+
+# Blogroll / Friend Links
+# friend_links:
+#     - name:
+#       url:
+#       description:
+#       lang:
+
+# FontAwesome
+# fas:
+
+# hexo-generator-feed
+rss: /atom.xml

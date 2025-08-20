@@ -1,0 +1,28 @@
+extends partial/layout
+
+block container
+    .archive
+        section.friend-links
+            h2.friend-links__title= __('friendlinks')
+
+            if page.content
+                .friend-links__content!= page.content
+
+            - var matchedLinks = theme.friend_links.filter(link => link.lang === page.lang)
+            if matchedLinks.length > 0
+                .friend-links__grid
+                    each link in matchedLinks
+                        .friend-link-card
+                            a.friend-link-card__link(href=link.url, target="_blank", rel="noopener")
+                                .friend-link-card__content
+                                    h3.friend-link-card__name= link.name
+                                    p.friend-link-card__description= link.description
+                                    if link.avatar
+                                            img.friend-link-card__avatar(src=link.avatar, alt=link.name)
+
+block pagination
+    include mixins/paginator
+    +home()
+
+block copyright
+    include partial/copyright

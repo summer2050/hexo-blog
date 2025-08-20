@@ -1,0 +1,25 @@
+meta(charset="utf-8")
+meta(name="X-UA-Compatible", content="IE=edge")
+meta(name="viewport", content="width=device-width, initial-scale=1")
+
+title
+    block site_title
+        = config.title
+
+block description
+    meta(name="description", content= config.description || 'A Blog Powered By Hexo')
+
+link(rel="icon", href=url_for(theme.favicon))
+link(rel="stylesheet", href=url_for("css/ares.css"))
+
+- const xml = config.url + '/atom.xml';
+link(rel="search", type="application/opensearchdescription+xml", href=xml, title=config.title)
+
+- const fas = theme.fas;
+- const crossorigin = "anonymous";
+script(src=`https://kit.fontawesome.com/${fas}.js`, crossorigin=crossorigin)
+script(
+    src='https://code.jquery.com/jquery-3.7.1.min.js',
+    integrity='sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=',
+    crossorigin=crossorigin
+)

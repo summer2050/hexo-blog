@@ -1,0 +1,59 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.friend-links {
+    &__content {
+      margin-bottom: 2em;
+      padding: 0 $base-spacing;
+      line-height: 1.6;
+    }
+  
+    &__title {
+      margin-bottom: 2rem;
+    }
+  
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0 $base-spacing;
+    }
+  
+    a {
+      color: blue;
+    }
+  }
+  
+.friend-link-card {
+    @include card;
+  
+    &__link {
+      text-decoration: none;
+      color: inherit;
+    }
+  
+    &__content {
+      padding: 1.5rem;
+    }
+  
+    &__name {
+      font-size: 1.2rem;
+      margin: 0 0 0.5rem 0;
+      color: #333;
+    }
+  
+    &__description {
+      margin: 0;
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+  
+    &__avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-top: $base-spacing;
+      object-fit: cover;
+    }
+  }
